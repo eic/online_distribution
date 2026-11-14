@@ -42,8 +42,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
 endif()
 
 if(APPLE)
-  # Linux large-file APIs do not exist on macOS, where off_t is 64-bit
-  add_compile_definitions(O_LARGEFILE=0 off64_t=off_t lseek64=lseek)
+  # Linux-only APIs: large-file (off_t is 64-bit on macOS) and MSG_CONFIRM
+  add_compile_definitions(O_LARGEFILE=0 off64_t=off_t lseek64=lseek MSG_CONFIRM=0)
 endif()
 
 # mirrors configure.ac's AC_CHECK_HEADERS(getopt.h) - under Automake

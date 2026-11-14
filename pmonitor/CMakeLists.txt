@@ -95,7 +95,10 @@ target_include_directories(pmonitor PUBLIC
   PRIVATE ${EVENT_INCLUDE_DIR})
 
 target_link_libraries(pmonitor PUBLIC ${EVENT_LIBRARY} ROOT::Core ROOT::Thread pthread)
-target_link_options(pmonitor PRIVATE -Wl,--no-as-needed)
+if(NOT APPLE)
+  # GNU ld only; Apple ld does not support --no-as-needed
+  target_link_options(pmonitor PRIVATE -Wl,--no-as-needed)
+endif()
 
 # mirrors configure.ac's "test for root 6" -> AC_DEFINE(HAVE_ROOT6).
 # pmonitor.cc's TThread-based live-update path is gated on this.
