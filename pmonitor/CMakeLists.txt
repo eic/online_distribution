@@ -95,8 +95,11 @@ target_include_directories(pmonitor PUBLIC
   PRIVATE ${EVENT_INCLUDE_DIR})
 
 target_link_libraries(pmonitor PUBLIC ${EVENT_LIBRARY} ROOT::Core ROOT::Thread pthread)
-if(NOT APPLE)
-  # GNU ld only; Apple ld does not support --no-as-needed
+if(APPLE)
+  # pinit() and process_event() are provided by the user's analysis code at
+  # load time; Apple ld does not allow undefined symbols in a dylib by default
+  target_link_options(pmonitor PRIVATE -Wl,-undefined,dynamic_lookup)
+else()
   target_link_options(pmonitor PRIVATE -Wl,--no-as-needed)
 endif()
 
