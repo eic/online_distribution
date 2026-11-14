@@ -34,10 +34,16 @@ include(CheckIncludeFileCXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux" OR APPLE)
   # mirrors configure.ac's `CPPFLAGS="$CPPFLAGS -DLinux"` for the
-  # *-*-linux* host case
+  # *-*-linux* host case; also needed on macOS, where the non-Linux
+  # branches (<bstring.h>, sig_handler(...)) do not compile
   add_compile_definitions(Linux)
+endif()
+
+if(APPLE)
+  # Linux large-file APIs do not exist on macOS, where off_t is 64-bit
+  add_compile_definitions(O_LARGEFILE=0 off64_t=off_t lseek64=lseek)
 endif()
 
 # mirrors configure.ac's AC_CHECK_HEADERS(getopt.h) - under Automake
