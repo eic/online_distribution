@@ -265,6 +265,10 @@ int h2gcroc3_10G_pool::iValue(const int sample, const int ch, const char *what)
 {
   decode();
   if ( ch < 0 || ch >= _nr_channels) return 0;
+
+  // iValue(wf, ch, "SAMPLESIZE") - here all channels have the same samples
+  if ( strcmp(what, "SAMPLESIZE") == 0) return iValue(sample, "SAMPLESIZE");
+
   const h2gcroc3_10G_pool::sample *s = getSample(sample);
   if ( !s) return 0;
 

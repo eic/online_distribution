@@ -18,7 +18,7 @@ public:
   ~Packet_idh2gcroc3_10G();
 
   int    iValue(const int sample, const int ch);
-  int    iValue(const int sample, const int ch, const char *what);
+  int    iValue(const int sample, const int ch, const char *what);   // "TOT", "TOA"; iValue(wf, ch, "SAMPLESIZE")
   int    iValue(const int ,const char * what);
   int    iValue(const int event, const int sample, const int ch);
   int    iValue(const int wf, const int sample, const int ch, const char *what);

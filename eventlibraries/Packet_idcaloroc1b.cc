@@ -253,6 +253,22 @@ int Packet_idcaloroc1b::iValue(const int n, const char *what)
   return 0;
 }
 
+int Packet_idcaloroc1b::iValue(const int wf, const int ch, const char *what)
+{
+  decode();
+
+  if ( strcmp(what,"SAMPLESIZE") == 0 )
+    {
+      if ( wf < 0 || ch < 0 || ch >= channels) return 0;
+      int link = ch / NUM_CHANNELS_PER_LINK;
+      unsigned int uwf = wf;
+      if ( uwf >= waveforms_by_link[link].size() ) return 0;
+      return (int) waveforms_by_link[link][uwf].samples.size();
+    }
+
+  return 0;
+}
+
 const Packet_idcaloroc1b::caloroc_frame *
 Packet_idcaloroc1b::getFrame( const int wf, const int sample, const int ch, int &localch )
 {

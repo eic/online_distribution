@@ -128,6 +128,14 @@ protected:
   unsigned long long _bad_markers;
   unsigned long long _truncated;
   unsigned long long _rejected;
+
+public:
+
+  // iValue(wf, ch, "SAMPLESIZE"): the samples of waveform wf in channel ch.
+  // (Declared down here on purpose: programs built against an earlier
+  // version find the virtual functions by their position, so new ones
+  // go after all the existing ones.)
+  virtual int iValue(const int wf, const int ch, const char *what) = 0;
 };
 
 #endif

@@ -50,9 +50,14 @@ public:
   // "what" is one of:
   // "CHANNELS"    - total addressable channels (n ignored)
   // "NR_WF"       - number of waveforms found, across all links (n ignored)
-  // "SAMPLESIZE"  - number of samples in waveform n
+  // "SAMPLESIZE"  - number of samples in waveform n (the longest of the links)
   // "LINKPRESENT" - 1 if link n (0..11) produced any data, else 0
   int    iValue(const int n, const char *what);
+
+  // "SAMPLESIZE" - number of samples of waveform wf in channel ch. The
+  // links are cut at different places at the Packet boundaries, so the
+  // first and last waveform can be shorter in some links than in others.
+  int    iValue(const int wf, const int ch, const char *what);
 
   // per-channel, per-sample access within waveform wf. channel is
   // 0..CHANNELS-1 (link = channel/NUM_CHANNELS_PER_LINK). Defaults to ADC1

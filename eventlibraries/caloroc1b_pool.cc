@@ -212,6 +212,22 @@ int caloroc1b_pool::iValue(const int n, const char *what)
   return 0;
 }
 
+int caloroc1b_pool::iValue(const int wf, const int ch, const char *what)
+{
+  decode();
+
+  if ( strcmp(what, "SAMPLESIZE") == 0)
+    {
+      if ( wf < 0 || (unsigned int) wf >= _nr_offered) return 0;
+      if ( ch < 0 || ch >= _channels) return 0;
+      int link = ch / NUM_CHANNELS_PER_LINK;
+      if ( (unsigned int) wf >= _closed[link].size()) return 0;
+      return (int) _closed[link][wf].samples.size();
+    }
+
+  return 0;
+}
+
 const caloroc1b_pool::caloroc_frame *
 caloroc1b_pool::getFrame(const int wf, const int sample, const int ch, int &localch) const
 {

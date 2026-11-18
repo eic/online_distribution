@@ -19,7 +19,7 @@ public:
   ~h2gcroc3_10G_pool() {}
 
   int    iValue(const int sample, const int ch);
-  int    iValue(const int sample, const int ch, const char *what);
+  int    iValue(const int sample, const int ch, const char *what);   // "TOT", "TOA"; iValue(wf, ch, "SAMPLESIZE")
   int    iValue(const int n, const char *what);
   int    iValue(const int wf, const int sample, const int ch);
   int    iValue(const int wf, const int sample, const int ch, const char *what);

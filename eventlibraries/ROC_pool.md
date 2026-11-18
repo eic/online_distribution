@@ -118,6 +118,7 @@ All pools:
 | `iValue(0, "NR_WF")`              | number of waveforms on offer         |
 | `iValue(0, "CHANNELS")`           | number of channels                   |
 | `iValue(wf, "SAMPLESIZE")`        | samples in waveform wf               |
+| `iValue(wf, ch, "SAMPLESIZE")`    | samples in waveform wf, channel ch   |
 | `iValue(wf, sample, ch)`          | the ADC value                        |
 | `iValue(wf, sample, ch, "what")`  | other per-sample values, see below   |
 | `dump(os)`                        | the waveforms on offer, as text      |
@@ -145,7 +146,8 @@ Format 310 (`caloroc1b_pool`), as in the Packet:
 - `iValue(link, "LINKPRESENT")`, links 0-11
 - channels of all links in one range, link = ch / 18
 - `iValue(wf, "SAMPLESIZE")` is the longest of the links' waveforms wf;
-  a shorter link reads back zeros past its end
+  a shorter link reads back zeros past its end. `iValue(wf, ch,
+  "SAMPLESIZE")` gives the samples of channel ch's link.
 
 As in the Packet, waveform `wf` is the wf-th waveform of each link. So that
 this pairing holds when the links run ahead of each other, a waveform is

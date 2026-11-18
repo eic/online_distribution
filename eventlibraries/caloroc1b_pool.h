@@ -23,6 +23,9 @@ public:
   // "CHANNELS", "NR_WF", "SAMPLESIZE", "LINKPRESENT" - as in the Packet
   int    iValue(const int n, const char *what);
 
+  // "SAMPLESIZE" - samples of waveform wf in channel ch, as in the Packet
+  int    iValue(const int wf, const int ch, const char *what);
+
   // ADC1
   int    iValue(const int wf, const int sample, const int ch);
 

@@ -539,6 +539,12 @@ int Packet_idh2gcroc3_10G::iValue(const int sample, const int ch, const char *wh
   decode();
   if ( ch < 0 || ch >=_nr_channels || sample < 0) return 0;
 
+  // iValue(wf, ch, "SAMPLESIZE") - here all channels have the same samples
+  if ( strcmp(what,"SAMPLESIZE") == 0 )
+    {
+      return iValue(sample, "SAMPLESIZE");
+    }
+
   unsigned int un = sample;
   if ( un >= waveform.size() ) return 0;
 
