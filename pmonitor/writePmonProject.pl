@@ -103,7 +103,7 @@ ROOTLIBS = \$(shell root-config --glibs)
 CXXFLAGS = -I.  \$(ROOTFLAGS) -I\$(ONLINE_MAIN)/include -I\$(OFFLINE_MAIN)/include
 RCFLAGS = -I.  -I\$(ONLINE_MAIN)/include -I\$(OFFLINE_MAIN)/include
 
-LDFLAGS = -Wl,--no-as-needed  -L\$(ONLINE_MAIN)/lib -L\$(OFFLINE_MAIN)/lib -lpmonitor -lEvent -lNoRootEvent -lmessage  \$(ROOTLIBS) -fPIC
+LDFLAGS = -L\$(ONLINE_MAIN)/lib -L\$(OFFLINE_MAIN)/lib -lpmonitor -lEvent -lNoRootEvent -lmessage  \$(ROOTLIBS) -fPIC
 
 
 
